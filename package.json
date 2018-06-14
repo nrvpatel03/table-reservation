@@ -1,0 +1,24 @@
+{
+  "name": "table-reservation",
+  "version": "1.0.0",
+  "description": "Node.js and Express app",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nrvpatel03/table-reservation.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nrvpatel03/table-reservation/issues"
+  },
+  "homepage": "https://github.com/nrvpatel03/table-reservation#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3"
+  }
+}
