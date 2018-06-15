@@ -50,7 +50,7 @@ var reservations = [
 function postReservation(){
     app.post("/api/reservations",function(req,res){
         var newReservation = req.body;
-        if(reservations.length > 5){
+        if(reservations.length >= 5){
             waitlistPeople.push(newReservation);
             res.json(newReservation);
             return false;
@@ -61,7 +61,6 @@ function postReservation(){
         }
     })
 }
-
 postReservation();
 
 

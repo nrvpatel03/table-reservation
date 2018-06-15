@@ -22,7 +22,7 @@
             Table Reservation
         </div>
         <div class="card-body">
-            <form>
+            <form action="/api/reservations" method="POST">
                 <div class="form-group">
                     <label for="name">Name</label>
                     <input id="nameinput" type="text" class="form-control" id="name" placeholder="Enter name">
@@ -45,14 +45,14 @@
     </div>
     <br>
     <p>
-        <a href="#">API Table Link</a> | <a href="#">API Wait List</a> | <a href="#">GitHub Repo</a>
+        <a href="/api/reservations">API Table Link</a> | <a href="/api/waitlist">API Wait List</a> | <a href="#">GitHub Repo</a>
     </p>
 </div>
 <br><br><br>
 
 
 <!--Bootstrap javascript files and jquery-->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
 <script>
@@ -68,9 +68,21 @@
             email: email,
             uniqueId: unique
         }
-        $.post("http://localhost:3000/api/reservations",obj,function(data){
-            console.log(data);
+        //take object and post 
+        var reslength;
+        $.get("/api/reservations",function(data){
+            reslength = data.length;
         });
+
+        $.post("http://localhost:3000/api/reservations",obj,function(data){
+            if(reslength>=5){
+                alert("You have been added to the waitlist");
+            }else{
+                reslength ++;
+                alert("A table has been reserved for you!");
+            }
+        });
+        $(this).closest('form').find("input[type=text], input[type=number], input[type=email]").val("");
     });
 </script>
 </body>

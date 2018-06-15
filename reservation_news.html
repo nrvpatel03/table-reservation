@@ -20,7 +20,7 @@
                 <div class="card-header bg-primary text-white">
                     Current Reservations
                 </div>
-                <div class="card-body">
+                <div id="currRes" class="card-body">
                     
                 </div>
         </div>
@@ -29,12 +29,38 @@
                 <div class="card-header bg-primary text-white">
                     Waiting list
                 </div>
-                <div class="card-body">
+                <div id="currWait" class="card-body">
                     
                 </div>
         </div>
         <br>
         <p>
-            <a href="#">API Table Link</a> | <a href="#">API Wait List</a> | <a href="#">GitHub Repo</a>
+            <a href="/api/reservations">API Table Link</a> | <a href="/api/waitlist">API Wait List</a> | <a href="#">GitHub Repo</a>
         </p>
     </div>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script>
+        var resDiv = $("<div></div>");
+        var waitDiv = $("<div></div>");
+        
+        $.get("/api/reservations", function(data){
+            for(var i = 0; i<data.length; i++){
+                resDiv.append("<h1>" + data[i].name + "</h1>");
+                resDiv.append("<h2>" + data[i].phoneNumber + "</h2>");
+                resDiv.append("<h3>" + data[i].email + "</h3>");
+                resDiv.append("<h3>" + data[i].uniqueId + "</h3>");
+                $("#currRes").append(resDiv);
+            }
+        });
+        $.get("/api/waitlist", function(data){
+            for(var i = 0; i<data.length; i++){
+                waitDiv.append("<h1>" + data[i].name + "</h1>");
+                waitDiv.append("<h2>" + data[i].phoneNumber + "</h2>");
+                waitDiv.append("<h3>" + data[i].email + "</h3>");
+                waitDiv.append("<h3>" + data[i].uniqueId +"</h3>");
+                $("#currWait").append(waitDiv);
+            }
+        })
+    </script>
+</body>
+</html>
